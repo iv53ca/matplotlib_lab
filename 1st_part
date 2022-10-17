@@ -1,0 +1,19 @@
+import matplotlib.pyplot as plt
+import numpy as np
+with open(r"001.dat") as datFile:
+    d1 = [data.split() for data in datFile]
+print(d1)
+n = int(d1[0][0])
+print(n)
+x = []
+y = []
+for i in range(n):
+    x.append(float(d1[i+1][0]))
+    y.append(float(d1[i+1][1]))
+print(x,y)
+plt.figure(figsize = (30,15))
+plt.tick_params(axis='both', which='major', labelsize=50)
+plt.plot(x,y,"ro")
+plt.xlabel("some numbers",fontsize=50)
+plt.ylabel("some numbers",fontsize=50)
+plt.title("001.dat",fontsize = 60)
