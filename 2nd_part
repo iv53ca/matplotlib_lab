@@ -1,0 +1,30 @@
+import matplotlib.pyplot as plt
+import numpy as np
+with open(r"2.txt") as datFile:
+    d1 = [data.split() for data in datFile]
+nframe = len(d1)
+massx = []
+massy = []
+for i in range(int(nframe/2)):
+    massx.append(d1[2*i])
+    massy.append(d1[2*i+1])
+    x = []
+    y = []
+    for j in range(len(massx[i])):
+        x.append(float(massx[i][j]))
+        y.append(float(massy[i][j]))
+    plt.figure(figsize=(40,200))
+    plt.subplot(nframe,1,i+1)
+    plt.tick_params(axis='both', which='major', labelsize=50)
+    plt.plot(x,y)    
+    plt.minorticks_on()
+    plt.xlabel("x",fontsize = 50)
+    plt.ylabel("y",fontsize = 50)
+    plt.xlim([0, 17])
+    plt.ylim([-17, 17])
+    plt.grid(which='major')
+    plt.grid(which='minor', linestyle=':')
+    plt.title(i+1,fontsize = 50)
+    plt.tight_layout()
+    
+       
