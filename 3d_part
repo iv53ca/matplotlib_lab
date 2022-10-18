@@ -1,0 +1,53 @@
+import matplotlib.pyplot as plt
+import numpy as np
+from matplotlib import colors
+from matplotlib.ticker import PercentFormatter
+from itertools import groupby
+
+locs = ['best', 'upper right', 'upper left', 'lower left', 
+        'lower right', 'right', 'center left', 'center right', 
+        'lower center', 'upper center', 'center']
+
+prep_mark = []
+group_mark = []
+prep = []
+mark = []
+group = []
+with open(r"students.csv") as datFile:
+    d1 = [data.split(";") for data in datFile]
+n = len(d1)
+for i in range(n):
+    prep_mark.append([d1[i][0], int(d1[i][2])])
+    group_mark.append([int(d1[i][1]),int(d1[i][2])])
+    prep.append(d1[i][0])
+    group.append(int(d1[i][1]))
+    mark.append(int(d1[i][2]))
+    
+marks = list(set(mark))
+col_mark = len(marks)
+m_g_final = []
+for j in range(col_mark):
+    m_g = []
+    for i in range(n):
+        if marks[j] == mark[i]:
+            m_g.append(group[i])
+    m_g_final.append(m_g)
+    
+plt.figure(figsize = (11,6))
+plt.hist(m_g_final, 15, histtype='bar',stacked=True, label = marks)
+plt.legend(loc=locs[1])
+plt.title("Mark per group",fontsize = 20)
+
+preps = sorted(list(set(prep)))
+p_g_final = []
+for j in range(col_mark):
+    p_g = []
+    for i in range(n):
+        if marks[j] == mark[i]:
+            p_g.append(prep[i])
+    p_g_final.append(p_g)
+
+plt.figure(figsize = (11,6))
+plt.hist(p_g_final, 15, histtype='bar',stacked=True, label = marks)
+plt.legend(loc=locs[1])
+plt.title("Mark per prep",fontsize = 20)
